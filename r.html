@@ -63,10 +63,10 @@ var LOGO="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAScAAACNCAIAAAB6yCsqAABA
 function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
 function nlSvg(d){
   const min=Math.max(-20,Math.min(0,Math.round(+d.min||-5))),max=Math.min(20,Math.max(min+2,Math.round(+d.max||5)));
-  const n=max-min,W=170,x=v=>8+(v-min)*(W-16)/n;
-  let s=`<svg viewBox="0 0 ${W} 22" style="width:100%;max-width:${W}mm;display:block;margin:1.5mm 0"><line x1="3" y1="10" x2="${W-3}" y2="10" stroke="#222" stroke-width=".4"/><path d="M3 10 l2.4 -1.6 v3.2z M${W-3} 10 l-2.4 -1.6 v3.2z" fill="#222"/>`;
-  for(let v=min;v<=max;v++)s+=`<line x1="${x(v)}" y1="8.2" x2="${x(v)}" y2="11.8" stroke="#222" stroke-width=".3"/><text x="${x(v)}" y="16.5" font-size="3.3" text-anchor="middle" font-family="Lexend,Arial" fill="#222">${v<0?"−"+(-v):v}</text>`;
-  (Array.isArray(d.points)?d.points:[]).slice(0,6).forEach(p=>{const v=+p.value;if(!(v>=min&&v<=max))return;s+=`<circle cx="${x(v)}" cy="10" r="1.5" fill="#4B1D6B"/>`+(p.label?`<text x="${x(v)}" y="5.5" font-size="3" text-anchor="middle" font-family="Lexend,Arial" fill="#4B1D6B" font-weight="700">${esc(String(p.label).slice(0,14))}</text>`:"")});
+  const n=max-min,W=120,x=v=>8+(v-min)*(W-16)/n;
+  let s=`<svg viewBox="0 -2 ${W} 24" style="width:100%;max-width:${W}mm;display:block;margin:1.5mm 0"><line x1="3" y1="10" x2="${W-3}" y2="10" stroke="#222" stroke-width=".4"/><path d="M3 10 l2.4 -1.6 v3.2z M${W-3} 10 l-2.4 -1.6 v3.2z" fill="#222"/>`;
+  for(let v=min;v<=max;v++)s+=`<line x1="${x(v)}" y1="8.2" x2="${x(v)}" y2="11.8" stroke="#222" stroke-width=".3"/><text x="${x(v)}" y="16.5" font-size="5" text-anchor="middle" font-family="Lexend,Arial" fill="#222">${v<0?"−"+(-v):v}</text>`;
+  (Array.isArray(d.points)?d.points:[]).slice(0,6).forEach(p=>{const v=+p.value;if(!(v>=min&&v<=max))return;s+=`<circle cx="${x(v)}" cy="10" r="2" fill="#4B1D6B"/>`+(p.label?`<text x="${x(v)}" y="5.5" font-size="5" text-anchor="middle" font-family="Lexend,Arial" fill="#4B1D6B" font-weight="700">${esc(String(p.label).slice(0,14))}</text>`:"")});
   return s+"</svg>";
 }
 function diagram(d){
